@@ -12,12 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install apt-dep
+      run: sudo apt-get install -y flex bison byacc make m4
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
     - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      run: make all
