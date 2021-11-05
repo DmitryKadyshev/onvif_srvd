@@ -3,8 +3,12 @@ name: C/C++ CI
 on:
   push:
     branches: [ master ]
+    tags:
+      - '*'
   pull_request:
     branches: [ master ]
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -18,7 +22,7 @@ jobs:
     - name: make
       run: make all
     - name: Zip Release
-      uses: TheDoctor0/zip-release@0.6.0
+      uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig'
@@ -26,5 +30,5 @@ jobs:
     - name: Upload Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "release.zip"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: 'release.zip'
+        token: ${{ secrets.RELEASE }}
